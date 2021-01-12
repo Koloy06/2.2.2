@@ -3,6 +3,7 @@ package web.dao;
 import web.model.Car;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CarDao {
 
@@ -17,17 +18,9 @@ public class CarDao {
     }
 
     public List<Car> getCars(int count) {
-        List<Car> carsCount = new ArrayList<>();
         if (count < cars.size() && count > 0) {
-            for (int i = 0; i < count; i++) {
-                carsCount.add(cars.get(i));
-            }
-            return carsCount;
+            return cars.stream().limit(count).collect(Collectors.toList());
         }
-        return getCars();
-    }
-
-    public List<Car> getCars() {
         return cars;
     }
 }
